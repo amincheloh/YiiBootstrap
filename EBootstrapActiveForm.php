@@ -15,31 +15,31 @@ class EBootstrapActiveForm extends CActiveForm {
 	 * Default: false
 	 */
 	public $horizontal = false;
-	
+
 	/*
 	 * Error message css class
 	 *
 	 * Default: help-inline
 	 */
 	public $errorMessageCssClass = 'help-inline';
-	
+
 	/*
-	 * Init the widget 
+	 * Init the widget
 	 */
 	public function init() {
 		if ($this->horizontal)
 			EBootstrap::mergeClass($this->htmlOptions, array('form-horizontal'));
-		
+
 		parent::init();
 	}
-	
+
 	/*
 	 * Execute the widget
 	 */
 	public function run() {
 		parent::run();
 	}
-	
+
 	/*
 	 * Begins a control group
 	 *
@@ -54,31 +54,31 @@ class EBootstrapActiveForm extends CActiveForm {
 		$error = $model->getError($attribute);
 		if (!empty($error))
 			EBootstrap::mergeClass($option, array('error'));
-		
+
 		echo EBootstrap::openTag('div', array('class' => $option['class']));
 	}
-	
+
 	/*
 	 * End of the control group
 	 */
 	public function endControlGroup() {
 		echo EBootstrap::closeTag('div');
 	}
-	
+
 	/*
 	 * Beginning of the controls (inputs)
 	 */
 	public function beginControls() {
 		echo EBootstrap::openTag('div', array('class' => 'controls'));
 	}
-	
+
 	/*
 	 * End of the controls
 	 */
 	public function endControls() {
 		echo EBootstrap::closeTag('div');
 	}
-	
+
 	/*
 	 * Beginning of the form actions
 	 *
@@ -87,14 +87,14 @@ class EBootstrapActiveForm extends CActiveForm {
 	public function beginActions() {
 		echo EBootstrap::openTag('div', array('class' => 'form-actions'));
 	}
-	
+
 	/*
 	 * End form actions
 	 */
 	public function endActions() {
 		echo EBootstrap::closeTag('div');
 	}
-	
+
 	/*
 	 * Error summary
 	 *
@@ -105,10 +105,10 @@ class EBootstrapActiveForm extends CActiveForm {
 	 * @param string $footer
 	 * @param array $htmlOptions
 	 */
-	public function errorSummary($model,$header=null,$footer=null,$htmlOptions=array()) {
+	public function errorSummary($model, $header = null, $footer = null, $htmlOptions = array()) {
 		return EBootstrap::errorSummary($model, $header, $footer, $htmlOptions);
 	}
-	
+
 	/*
 	 * Returns a HTML label
 	 *
@@ -116,13 +116,13 @@ class EBootstrapActiveForm extends CActiveForm {
 	 * @param string $attribute The attribute
 	 * @param array $htmlOptions
 	 */
-	public function label($model,$attribute,$htmlOptions=array()) {
+	public function label($model, $attribute, $htmlOptions = array()) {
 		if ($this->horizontal)
 			EBootstrap::mergeClass($htmlOptions, array('control-label'));
-		
-		return EBootstrap::activeLabel($model,$attribute,$htmlOptions);
+
+		return EBootstrap::activeLabel($model, $attribute, $htmlOptions);
 	}
-	
+
 	/*
 	 * Returns an advanced HTML label
 	 *
@@ -130,13 +130,13 @@ class EBootstrapActiveForm extends CActiveForm {
 	 * @param string $attribute The attribute
 	 * @param array $htmlOptions
 	 */
-	public function labelEx($model,$attribute,$htmlOptions=array()) {
+	public function labelEx($model, $attribute, $htmlOptions = array()) {
 		if ($this->horizontal)
 			EBootstrap::mergeClass($htmlOptions, array('control-label'));
-		
-		return EBootstrap::activeLabelEx($model,$attribute,$htmlOptions);
+
+		return EBootstrap::activeLabelEx($model, $attribute, $htmlOptions);
 	}
-	
+
 	/*
 	 * Render an input field with a prepended text or icon
 	 *
@@ -145,10 +145,10 @@ class EBootstrapActiveForm extends CActiveForm {
 	 * @param string $prepend The text or icon to prepend
 	 * @param array $htmlOptions
 	 */
-	public function textFieldPrepend($model,$attribute,$prepend,$htmlOptions=array()) {
+	public function textFieldPrepend($model, $attribute, $prepend, $htmlOptions = array()) {
 		return EBootstrap::activeTextFieldPrepend($model, $attribute, $prepend, $htmlOptions);
 	}
-	
+
 	/*
 	 * Render an input field with a append text or icon
 	 *
@@ -157,10 +157,10 @@ class EBootstrapActiveForm extends CActiveForm {
 	 * @param string $append The text or icon to append
 	 * @param array $htmlOptions
 	 */
-	public function textFieldAppend($model,$attribute,$append,$htmlOptions=array()) {
+	public function textFieldAppend($model, $attribute, $append, $htmlOptions = array()) {
 		return EBootstrap::activeTextFieldAppend($model, $attribute, $append, $htmlOptions);
 	}
-	
+
 	/*
 	 * Render a password field with a prepended text or icon
 	 *
@@ -169,10 +169,10 @@ class EBootstrapActiveForm extends CActiveForm {
 	 * @param string $prepend The text or icon to prepend
 	 * @param array $htmlOptions
 	 */
-	public function passwordFieldPrepend($model,$attribute,$prepend,$htmlOptions=array()) {
+	public function passwordFieldPrepend($model, $attribute, $prepend, $htmlOptions = array()) {
 		return EBootstrap::activePasswordFieldPrepend($model, $attribute, $prepend, $htmlOptions);
 	}
-	
+
 	/*
 	 * Render a password field with a append text or icon
 	 *
@@ -181,10 +181,10 @@ class EBootstrapActiveForm extends CActiveForm {
 	 * @param string $append The text or icon to append
 	 * @param array $htmlOptions
 	 */
-	public function passwordFieldAppend($model,$attribute,$append,$htmlOptions=array()) {
+	public function passwordFieldAppend($model, $attribute, $append, $htmlOptions = array()) {
 		return EBootstrap::activePasswordFieldAppend($model, $attribute, $append, $htmlOptions);
 	}
-	
+
 	/*
 	 * Returns a help block
 	 *
@@ -196,10 +196,10 @@ class EBootstrapActiveForm extends CActiveForm {
 		$html = EBootstrap::openTag('p', array('class' => 'help-block'));
 		$html .= $help;
 		$html .= EBootstrap::closeTag('p');
-		
+
 		return $html;
 	}
-	
+
 	/*
 	 * Render a submit buttom
 	 *

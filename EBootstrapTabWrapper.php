@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 /*
  * Wrapper for {@link EBootstrapTabNavigation} and {@link EBootstrapTabContentWrapper}
  * This widget is used only if the navigation should not be positioned at the top
- * 
+ *
  * @author Tim Helfensdörfer <tim@visualappeal.de>
  * @version 0.3.0
  * @package bootstrap.widgets.tabs
@@ -16,13 +16,13 @@ class EBootstrapTabWrapper extends EBootstrapWidget {
 	 * Default: top
 	 */
 	public $position = '';
-	
+
 	/*
 	 * Init widget
 	 */
 	public function init() {
 		parent::init();
-		
+
 		if (!empty($this->position)) {
 			switch ($this->position) {
 				case 'bottom':
@@ -37,13 +37,13 @@ class EBootstrapTabWrapper extends EBootstrapWidget {
 			}
 		}
 	}
-	
+
 	/*
 	 * Render footer
 	 */
 	public function run() {
 		parent::run();
-		
+
 		if (!empty($this->position)) {
 			echo EBootstrap::closeTag('div');
 		}

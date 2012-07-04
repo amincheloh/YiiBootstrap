@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 Yii::import('zii.widgets.grid.CGridView');
 
@@ -18,27 +18,27 @@ class EBootstrapGridView extends CGridView {
 	 * If it's set null the default css file will be included
 	 */
 	public $cssFile = false;
-	
+
 	/*
 	 * Bordered table
 	 */
 	public $bordered = false;
-	
+
 	/*
 	 * Every second row has a darker background
 	 */
 	public $striped = false;
-	
+
 	/*
 	 * Smaller table fields to display more content
 	 */
 	public $condensed = false;
-	
+
 	/*
 	 * Default css class for the pager
 	 */
 	public $pagerCssClass = 'pagination';
-	
+
 	/* 
 	 * Align of the pager
 	 *
@@ -46,13 +46,13 @@ class EBootstrapGridView extends CGridView {
 	 * Default: left
 	 */
 	public $pagerAlign = 'centered';
-	
+
 	/*
 	 * Init the widget
 	 */
-	public function init() {		
+	public function init() {
 		parent::init();
-		
+
 		$classes = array('table');
 		if ($this->bordered)
 			$classes[] = 'table-bordered';
@@ -61,9 +61,9 @@ class EBootstrapGridView extends CGridView {
 		if ($this->condensed)
 			$classes[] = 'table-condensed';
 		EBootstrap::mergeClassString($this->itemsCssClass, $classes);
-		
+
 		EBootstrap::mergeClass($this->htmlOptions, array('bootstrap-grid-view'));
-		
+
 		switch ($this->pagerAlign) {
 			case 'centered':
 				EBootstrap::mergeClassString($this->pagerCssClass, array('pagination-centered'));
@@ -72,7 +72,7 @@ class EBootstrapGridView extends CGridView {
 				EBootstrap::mergeClassString($this->pagerCssClass, array('pagination-right'));
 				break;
 		}
-		
+
 		if ($this->cssFile === false) {
 			$cssFile = dirname(__FILE__).'/css/bootstrap.css';
 			$this->cssFile = Yii::app()->getAssetManager()->publish($cssFile);

@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 /*
  * Wrapper class for CHtml
  * EBootstrap adds some bootstrap elements to CHtml
- * 
+ *
  * @author Tim Helfensdörfer <tim@visualappeal.de>
  * @version 0.3.5
  * @package bootstrap
@@ -24,7 +24,7 @@ class EBootstrap extends CHtml {
 		else
 			$option['class'] = implode(' ', $add);
 	}
-	
+
 	/*
 	 * Merges a class string (i.e. cssClassName) with an array of classes
 	 *
@@ -36,7 +36,7 @@ class EBootstrap extends CHtml {
 			$class .= ' ';
 		$class .= implode(' ', $add);
 	}
-	
+
 	/*
 	 * Returns an inline label
 	 *
@@ -44,15 +44,15 @@ class EBootstrap extends CHtml {
 	 * @param string $type success|warning|important|info. Leave empty for default
 	 * @param array $htmlOptions
 	 */
-	public static function ilabel($label, $type='', $htmlOptions=array()) {
+	public static function ilabel($label, $type = '', $htmlOptions = array()) {
 		$classes = array('label');
 		if (!empty($type))
 			$classes[] = 'label-'.$type;
-		
+
 		self::mergeClass($htmlOptions, $classes);
 		return EBootstrap::tag('span', $htmlOptions, $label);
 	}
-	
+
 	/*
 	 * Returns an link-button
 	 *
@@ -70,7 +70,7 @@ class EBootstrap extends CHtml {
 	public static function ibutton($text, $url = '#', $type = '', $size = '', $disabled = false, $icon = '', $iconWhite = false, $htmlOptions = array()) {
 		return new EBootstrapButton($text, $url, $type, $size, $disabled, $icon, $iconWhite, $htmlOptions);
 	}
-	
+
 	/*
 	 * Returns a group of buttons
 	 *
@@ -81,7 +81,7 @@ class EBootstrap extends CHtml {
 	 */
 	public static function buttonGroup($buttons, $htmlOptions = array()) {
 		$html = '';
-		
+
 		if (is_array($buttons) and (count($buttons))) {
 			self::mergeClass($htmlOptions, array('btn-group'));
 			$html .= self::openTag('div', $htmlOptions)."\n";
@@ -90,10 +90,10 @@ class EBootstrap extends CHtml {
 			}
 			$html .= self::closeTag('div')."\n";
 		}
-		
+
 		return $html;
 	}
-	
+
 	/*
 	 * Returns a toolbar with button groups
 	 *
@@ -104,7 +104,7 @@ class EBootstrap extends CHtml {
 	 */
 	public static function buttonToolbar($buttonGroups, $htmlOptions = array()) {
 		$html = '';
-		
+
 		if (is_array($buttonGroups) and (count($buttonGroups))) {
 			self::mergeClass($htmlOptions, array('btn-toolbar'));
 			$html .= self::openTag('div', $htmlOptions)."\n";
@@ -113,30 +113,30 @@ class EBootstrap extends CHtml {
 			}
 			$html .= self::closeTag('div')."\n";
 		}
-		
+
 		return $html;
 	}
-	
+
 	/*
 	 * Returns a toolbar with button groups
 	 *
 	 * @param EBootstrapButton $button You can create the button with the help of EBootstrap::ibutton();
 	 * @param array $submenu Array of submenu items. Available options are text, url and htmlOptions
-	 * @param bool $split If split is set to true, the carret ist next to the button and both elements can be clicked separately 
+	 * @param bool $split If split is set to true, the carret ist next to the button and both elements can be clicked separately
 	 * @param array $htmlOptions
 	 */
 	public static function buttonDropdown(EBootstrapButton $button, $submenuItems = array(), $split = false, $htmlOptions = array()) {
 		$html = '';
-		
+
 		self::mergeClass($htmlOptions, array('btn-group'));
 		$html .= self::openTag('div', $htmlOptions);
-		
+
 		if (!$split) {
 			$button->htmlOptions['data-toggle'] = "dropdown";
 			$button->url = "#";
 			$button->text .= ' <span class="caret"></span>';
 			self::mergeClass($button->htmlOptions, array('dropdown-toggle'));
-		
+
 			$html .= $button."\n";
 		}
 		else {
@@ -144,29 +144,29 @@ class EBootstrap extends CHtml {
 			$carret->htmlOptions['data-toggle'] = "dropdown";
 			$carret->type = $button->type;
 			self::mergeClass($carret->htmlOptions, array('btn', 'dropdown-toggle'));
-			
+
 			$html .= $button."\n";
 			$html .= $carret."\n";
 		}
-		
+
 		if (is_array($submenuItems) and (count($submenuItems))) {
 			$html .= self::openTag('ul', array('class' => 'dropdown-menu'))."\n";
 			foreach ($submenuItems as $item) {
 				$html .= self::openTag('li')."\n";
-				
+
 				$itemOptions = isset($item['htmlOptions']) ? $item['htmlOptions'] : array();
 				$html .= self::link($item['text'], $item['url'], $itemOptions)."\n";
-				
+
 				$html .= self::closeTag('li')."\n";
 			}
 			$html .= self::closeTag('ul')."\n";
 		}
-		
+
 		$html .= self::closeTag('div')."\n";
-		
+
 		return $html;
 	}
-	
+
 	/*
 	 * Returns an icon
 	 *
@@ -181,9 +181,9 @@ class EBootstrap extends CHtml {
 			$return .= ' icon-white';
 		return $return.'"></i>';
 	}
-	
+
 	/* IMAGES */
-	
+
 	/*
 	 * Returns an custom thumbnail src
 	 *
@@ -202,11 +202,11 @@ class EBootstrap extends CHtml {
 			$src .= 'x'.$h;
 		$src .= '/'.$bgColor.'/'.$tColor.'.'.$format;
 		if (!is_null($text))
-			$src .= '&text=' . urlencode($text);
-		
+			$src .= '&text='.urlencode($text);
+
 		return $src;
 	}
-	
+
 	/*
 	 * Returns an image link
 	 *
@@ -217,16 +217,16 @@ class EBootstrap extends CHtml {
 	 */
 	public static function thumbnailLink($url, $src, $alt = '', $htmlOptions = array()) {
 		$html = '';
-		
+
 		$htmlOptions['href'] = $url;
 		self::mergeClass($htmlOptions, array('thumbnail'));
 		$html .= EBootstrap::openTag('a', $htmlOptions);
 		$html .= EBootstrap::tag('img', array('src' => $src, 'alt' => $alt));
 		$html .= EBootstrap::closeTag('a');
-		
+
 		return $html;
 	}
-	
+
 	/*
 	 * Returns an image with a caption
 	 *
@@ -237,26 +237,26 @@ class EBootstrap extends CHtml {
 	 * @param array $actions Array with actions which will be rendered below the body. All items has to be HTML
 	 * @param array $htmlOptions
 	 */
-	public static function imageCaption($src, $alt='', $caption = '', $body = '', $actions = array(), $htmlOptions=array()) {
+	public static function imageCaption($src, $alt = '', $caption = '', $body = '', $actions = array(), $htmlOptions = array()) {
 		$html = '';
-		
+
 		self::mergeClass($htmlOptions, array('thumbnail'));
 		$html .= self::openTag('div', $htmlOptions)."\n";
-				
+
 		$htmlOptions = array();
-		$htmlOptions['src']=$src;
-		$htmlOptions['alt']=$alt;
-		$html .= self::tag('img',$htmlOptions)."\n";
-		
+		$htmlOptions['src'] = $src;
+		$htmlOptions['alt'] = $alt;
+		$html .= self::tag('img', $htmlOptions)."\n";
+
 		if (!empty($caption) or !empty($body) or !empty($actions)) {
 			$html .= self::openTag('div', array('class' => 'caption'));
-			
+
 			if (!empty($caption))
 				$html .= self::tag('h5', array(), $caption)."\n";
-			
+
 			if (!empty($body))
 				$html .= self::tag('p', array(), $body)."\n";
-				
+
 			if (!empty($actions)) {
 				$html .= self::openTag('p')."\n";
 				foreach ($actions as $button) {
@@ -264,15 +264,15 @@ class EBootstrap extends CHtml {
 				}
 				$html .= self::closeTag('p')."\n";
 			}
-			
+
 			$html .= self::closeTag('div');
 		}
-    	
-    	$html .= self::closeTag('div')."\n";
-    	
-    	return $html;
+
+		$html .= self::closeTag('div')."\n";
+
+		return $html;
 	}
-	
+
 	/*
 	 * Render an input field with a prepended text or icon
 	 *
@@ -281,19 +281,19 @@ class EBootstrap extends CHtml {
 	 * @param string $prepend The text or icon to prepend
 	 * @param array $htmlOptions
 	 */
-	public static function activeTextFieldPrepend($model,$attribute,$prepend,$htmlOptions=array()) {
-       	$html = self::openTag('div', array('class' => 'input-prepend'))."\n";
-       	$html .= self::tag('span', array('class' => 'add-on'), $prepend)."\n";
-       
-       	self::resolveNameID($model,$attribute,$htmlOptions);
-    	self::clientChange('change',$htmlOptions);
-    	$html .= self::activeInputField('text',$model,$attribute,$htmlOptions)."\n";
-    	
-    	$html .= self::closeTag('div')."\n";
-    	
-    	return $html;
+	public static function activeTextFieldPrepend($model, $attribute, $prepend, $htmlOptions = array()) {
+		$html = self::openTag('div', array('class' => 'input-prepend'))."\n";
+		$html .= self::tag('span', array('class' => 'add-on'), $prepend)."\n";
+
+		self::resolveNameID($model, $attribute, $htmlOptions);
+		self::clientChange('change', $htmlOptions);
+		$html .= self::activeInputField('text', $model, $attribute, $htmlOptions)."\n";
+
+		$html .= self::closeTag('div')."\n";
+
+		return $html;
 	}
-	
+
 	/*
 	 * Render an input field with a appended text or icon
 	 *
@@ -302,20 +302,20 @@ class EBootstrap extends CHtml {
 	 * @param string $append The text or icon to append
 	 * @param array $htmlOptions
 	 */
-	public static function activeTextFieldAppend($model,$attribute,$prepend,$htmlOptions=array()) {
-       	$html = self::openTag('div', array('class' => 'input-append'))."\n";
-       
-       	self::resolveNameID($model,$attribute,$htmlOptions);
-    	self::clientChange('change',$htmlOptions);
-    	$html .= self::activeInputField('text',$model,$attribute,$htmlOptions)."\n";
-    	
-    	$html .= self::tag('span', array('class' => 'add-on'), $prepend)."\n";
-    	
-    	$html .= self::closeTag('div')."\n";
-    	
-    	return $html;
+	public static function activeTextFieldAppend($model, $attribute, $prepend, $htmlOptions = array()) {
+		$html = self::openTag('div', array('class' => 'input-append'))."\n";
+
+		self::resolveNameID($model, $attribute, $htmlOptions);
+		self::clientChange('change', $htmlOptions);
+		$html .= self::activeInputField('text', $model, $attribute, $htmlOptions)."\n";
+
+		$html .= self::tag('span', array('class' => 'add-on'), $prepend)."\n";
+
+		$html .= self::closeTag('div')."\n";
+
+		return $html;
 	}
-	
+
 	/*
 	 * Render a password field with a prepended text or icon
 	 *
@@ -324,19 +324,19 @@ class EBootstrap extends CHtml {
 	 * @param string $prepend The text or icon to prepend
 	 * @param array $htmlOptions
 	 */
-	public static function activePasswordFieldPrepend($model,$attribute,$prepend,$htmlOptions=array()) {
-       	$html = self::openTag('div', array('class' => 'input-prepend'))."\n";
-       	$html .= self::tag('span', array('class' => 'add-on'), $prepend)."\n";
-       
-       	self::resolveNameID($model,$attribute,$htmlOptions);
-    	self::clientChange('change',$htmlOptions);
-    	$html .= self::activeInputField('password',$model,$attribute,$htmlOptions)."\n";
-    	
-    	$html .= self::closeTag('div')."\n";
-    	
-    	return $html;
+	public static function activePasswordFieldPrepend($model, $attribute, $prepend, $htmlOptions = array()) {
+		$html = self::openTag('div', array('class' => 'input-prepend'))."\n";
+		$html .= self::tag('span', array('class' => 'add-on'), $prepend)."\n";
+
+		self::resolveNameID($model, $attribute, $htmlOptions);
+		self::clientChange('change', $htmlOptions);
+		$html .= self::activeInputField('password', $model, $attribute, $htmlOptions)."\n";
+
+		$html .= self::closeTag('div')."\n";
+
+		return $html;
 	}
-	
+
 	/*
 	 * Render a password field with a appended text or icon
 	 *
@@ -345,20 +345,20 @@ class EBootstrap extends CHtml {
 	 * @param string $append The text or icon to append
 	 * @param array $htmlOptions
 	 */
-	public static function activePasswordFieldAppend($model,$attribute,$prepend,$htmlOptions=array()) {
-       	$html = self::openTag('div', array('class' => 'input-append'))."\n";
-       
-       	self::resolveNameID($model,$attribute,$htmlOptions);
-    	self::clientChange('change',$htmlOptions);
-    	$html .= self::activeInputField('password',$model,$attribute,$htmlOptions)."\n";
-    	
-    	$html .= self::tag('span', array('class' => 'add-on'), $prepend)."\n";
-    	
-    	$html .= self::closeTag('div')."\n";
-    	
-    	return $html;
+	public static function activePasswordFieldAppend($model, $attribute, $prepend, $htmlOptions = array()) {
+		$html = self::openTag('div', array('class' => 'input-append'))."\n";
+
+		self::resolveNameID($model, $attribute, $htmlOptions);
+		self::clientChange('change', $htmlOptions);
+		$html .= self::activeInputField('password', $model, $attribute, $htmlOptions)."\n";
+
+		$html .= self::tag('span', array('class' => 'add-on'), $prepend)."\n";
+
+		$html .= self::closeTag('div')."\n";
+
+		return $html;
 	}
-	
+
 	/*
 	 * Render a bootstrap search field with rounded corners
 	 *
@@ -366,11 +366,11 @@ class EBootstrap extends CHtml {
 	 * @param string $value Predefined value
 	 * @param array $htmlOptions HTML options
 	 */
-	public static function searchField($name,$value='',$htmlOptions=array()) {
+	public static function searchField($name, $value = '', $htmlOptions = array()) {
 		self::mergeClass($htmlOptions, array('search-query'));
 		return self::textField($name, $value, $htmlOptions);
 	}
-		
+
 	/*
 	 * Render a submit button
 	 *
@@ -385,10 +385,10 @@ class EBootstrap extends CHtml {
 	 * @param array $htmlOptions
 	 */
 	public static function submitButton($label = 'submit', $type = 'primary', $size = '', $disabled = false, $icon = '', $iconWhite = false, $htmlOptions = array()) {
-		$htmlOptions['type']='submit';
-    	return new EBootstrapButton($label, '', $type, $size, $disabled, $icon, $iconWhite, $htmlOptions, 'button');
+		$htmlOptions['type'] = 'submit';
+		return new EBootstrapButton($label, '', $type, $size, $disabled, $icon, $iconWhite, $htmlOptions, 'button');
 	}
-	
+
 	/*
 	 * Error summary
 	 *
@@ -399,48 +399,43 @@ class EBootstrap extends CHtml {
 	 * @param string $footer
 	 * @param array $htmlOptions
 	 */
-	public static function errorSummary($model,$header=null,$footer=null,$htmlOptions=array()) {
-		$content='';
-		if(!is_array($model))
-			$model=array($model);
-		if(isset($htmlOptions['firstError']))
-		{
-			$firstError=$htmlOptions['firstError'];
+	public static function errorSummary($model, $header = null, $footer = null, $htmlOptions = array()) {
+		$content = '';
+		if (!is_array($model))
+			$model = array($model);
+		if (isset($htmlOptions['firstError'])) {
+			$firstError = $htmlOptions['firstError'];
 			unset($htmlOptions['firstError']);
 		}
 		else
-			$firstError=false;
-		foreach($model as $m)
-		{
-			foreach($m->getErrors() as $errors)
-			{
-				foreach($errors as $error)
-				{
-					if($error!='')
-						$content.="<li>$error</li>\n";
-					if($firstError)
+			$firstError = false;
+		foreach ($model as $m) {
+			foreach ($m->getErrors() as $errors) {
+				foreach ($errors as $error) {
+					if ($error != '')
+						$content .= "<li>$error</li>\n";
+					if ($firstError)
 						break;
 				}
 			}
 		}
-		if($content!=='')
-		{
-			if($header===null)
-				$header=Yii::t('yii','Please fix the following input errors:');
+		if ($content !== '') {
+			if ($header === null)
+				$header = Yii::t('yii', 'Please fix the following input errors:');
 			$header = EBootstrap::tag('h4', array('class' => 'alert-heading'), $header)."\n";
-			
-			if(!isset($htmlOptions['class']))
-				$htmlOptions['class']=EBootstrap::$errorSummaryCss;
-			
+
+			if (!isset($htmlOptions['class']))
+				$htmlOptions['class'] = EBootstrap::$errorSummaryCss;
+
 			EBootstrap::mergeClass($htmlOptions, array('alert', 'alert-error', 'alert-block'));
-			
-			return EBootstrap::tag('div',$htmlOptions,$header."\n<ul>\n$content</ul>".$footer);
+
+			return EBootstrap::tag('div', $htmlOptions, $header."\n<ul>\n$content</ul>".$footer);
 		}
 		else
 			return '';
 	}
 }
 
-EBootstrap::$afterRequiredLabel = ' <span class="required">' . Yii::t('Site', '(Required)') . '</span>';
+EBootstrap::$afterRequiredLabel = ' <span class="required">'.Yii::t('Site', '(Required)').'</span>';
 
 ?>

@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 /*
  * Class for creating a button
- * 
+ *
  * @author Tim Helfensdörfer <tim@visualappeal.de>
  * @version 0.3.2
  * @package bootstrap
@@ -12,46 +12,46 @@ class EBootstrapButton {
 	 * Button text
 	 */
 	public $text;
-	
+
 	/*
 	 * URL
 	 */
 	public $url;
-	
+
 	/*
 	 * Button type
 	 *
 	 * Possible values: primary|info|success|warning|danger|inverse. Leave empty for default
 	 */
 	public $type;
-	
+
 	/*
 	 * Size of the button
 	 *
 	 * Possible values: large|small|mini. Leave empty for default
 	 */
 	public $size;
-	
+
 	/*
 	 * Set true to disable the button
 	 */
 	public $disabled;
-	
+
 	/*
 	 * Icon
 	 */
 	public $icon;
-	
+
 	/*
 	 * Invert the icon color
 	 */
 	public $iconWhite;
-	
+
 	/*
 	 * HTML options
 	 */
 	public $htmlOptions;
-	
+
 	/*
 	 * Button type
 	 *
@@ -60,7 +60,7 @@ class EBootstrapButton {
 	 *		button
 	 */
 	public $element;
-	
+
 	/*
 	 * Construct a button element
 	 *
@@ -85,39 +85,39 @@ class EBootstrapButton {
 		$this->iconWhite = $iconWhite;
 		$this->htmlOptions = $htmlOptions;
 		$this->element = $element;
-		
+
 		$class = array('btn');
-		
+
 		EBootstrap::mergeClass($this->htmlOptions, $class);
 	}
-	
+
 	/*
 	 * Outputs the button
 	 */
 	public function __tostring() {
 		$class = array();
-		
+
 		if (!empty($this->size))
 			$class[] = 'btn-'.$this->size;
-		
+
 		if (!empty($this->type))
 			$class[] = 'btn-'.$this->type;
-		
+
 		if ($this->disabled)
 			$class[] = 'disabled';
-		
+
 		if (!empty($this->icon))
 			$this->text = EBootstrap::icon($this->icon, $this->iconWhite).' '.$this->text;
-		
+
 		EBootstrap::mergeClass($this->htmlOptions, $class);
-		
+
 		switch ($this->element) {
 			case 'button':
 				return EBootstrap::tag('button', $this->htmlOptions, $this->text)."\n";
 				break;
 			default:
 				return EBootstrap::link($this->text, $this->url, $this->htmlOptions)."\n";
-			break;
+				break;
 		}
 	}
 }

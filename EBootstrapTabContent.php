@@ -15,14 +15,14 @@ class EBootstrapTabContent extends EBootstrapWidget {
 	 * The ID is important and has to match the id in the url of the {@link EBootstrapTabNavigation}
 	 */
 	public $id = null;
-	
+
 	/*
 	 * If this page should be active
 	 *
 	 * Only one page should be active
 	 */
 	public $active = false;
-	
+
 	/*
 	 * Init the widget
 	 *
@@ -30,25 +30,25 @@ class EBootstrapTabContent extends EBootstrapWidget {
 	 */
 	public function init() {
 		parent::init();
-		
+
 		EBootstrap::mergeClass($this->htmlOptions, array('tab-pane'));
 		if ($this->active) {
 			EBootstrap::mergeClass($this->htmlOptions, array('active'));
 		}
-		
+
 		if (is_null($this->id))
 			$this->id = $this->getId();
-		
+
 		$this->htmlOptions['id'] = $this->id;
 		echo EBootstrap::openTag('div', $this->htmlOptions);
 	}
-	
+
 	/*
 	 * Render the footer of the widget
 	 */
 	public function run() {
 		parent::run();
-		
+
 		echo EBootstrap::closeTag('div');
 	}
 }

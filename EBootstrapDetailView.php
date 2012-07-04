@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 Yii::import('zii.widgets.CDetailView');
 
@@ -17,28 +17,28 @@ class EBootstrapDetailView extends CDetailView {
 	 * If it's set unequal false the css file specified will be included
 	 */
 	public $cssFile = false;
-	
+
 	/*
 	 * Bordered table
 	 */
 	public $bordered = false;
-	
+
 	/*
 	 * Every second row has a darker background
 	 */
 	public $striped = false;
-	
+
 	/*
 	 * Smaller table fields to display more content
 	 */
 	public $condensed = false;
-	
+
 	/*
 	 * Init the widget
 	 */
 	public function init() {
 		parent::init();
-		
+
 		$classes = array('table');
 		if ($this->bordered)
 			$classes[] = 'table-bordered';
@@ -46,7 +46,7 @@ class EBootstrapDetailView extends CDetailView {
 			$classes[] = 'table-striped';
 		if ($this->condensed)
 			$classes[] = 'table-condensed';
-		
+
 		EBootstrap::mergeClass($this->htmlOptions, $classes);
 	}
 }
